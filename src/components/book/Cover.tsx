@@ -34,7 +34,7 @@ export function Cover({ book }: CoverProps) {
           <div className="p-6 text-center">
             <h1 className="font-headline text-3xl font-bold text-foreground">{book.title}</h1>
             <p className="mt-2 text-lg text-muted-foreground">{book.author}</p>
-            <Button asChild size="lg" className="mt-6 w-full bg-primary text-primary-foreground hover:bg-primary/90">
+            <Button asChild size="lg" className="mt-6 w-full">
               <Link href={`/book/${book.id}`}>
                 Open Book
                 <ArrowRight />
