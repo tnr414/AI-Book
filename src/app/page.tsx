@@ -3,7 +3,7 @@
 import { Upload, Book as BookIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useRef, useState } from 'react';
+import { useRef, useState, useTransition } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { AILoading } from '@/components/book/ai/AIShared';
@@ -15,33 +15,32 @@ export default function Home() {
   const router = useRouter();
   const { toast } = useToast();
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [isUploading, setIsUploading] = useState(false);
+  const [isPending, startTransition] = useTransition();
 
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
-
-    setIsUploading(true);
     
     const formData = new FormData();
     formData.append('file', file);
 
-    try {
-      const newBookId = await processPdfAndCreateBook(formData);
-      if (newBookId) {
-        router.push(`/book/${newBookId}`);
-      } else {
-        throw new Error("Failed to create book.");
+    startTransition(async () => {
+      try {
+        const newBookId = await processPdfAndCreateBook(formData);
+        if (newBookId) {
+          router.push(`/book/${newBookId}`);
+        } else {
+          throw new Error("Failed to create book.");
+        }
+      } catch (error) {
+         toast({
+          title: "Error Processing PDF",
+          description: "There was an error processing your PDF. Please try again.",
+          variant: "destructive"
+         });
+         console.error(error);
       }
-    } catch (error) {
-       toast({
-        title: "Error Processing PDF",
-        description: "There was an error processing your PDF. Please try again.",
-        variant: "destructive"
-       });
-       console.error(error);
-       setIsUploading(false);
-    }
+    });
   };
 
   const handleUploadClick = () => {
@@ -90,8 +89,9 @@ export default function Home() {
               onChange={handleFileUpload}
               className="hidden"
               accept="application/pdf"
+              disabled={isPending}
             />
-            {isUploading ? (
+            {isPending ? (
               <AILoading loadingText="Converting to AI Book..." />
             ) : (
               <Button onClick={handleUploadClick} size="lg" className="w-full">

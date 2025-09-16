@@ -1,7 +1,8 @@
 'use server';
 
 import { addBook, Book } from '@/lib/book-data';
-import pdf from 'pdf-parse';
+import pdf from 'pdf-parse/lib/pdf-parse';
+import { v4 as uuidv4 } from 'uuid';
 
 export async function processPdfAndCreateBook(formData: FormData): Promise<string | null> {
     const file = formData.get('file') as File;
@@ -13,7 +14,7 @@ export async function processPdfAndCreateBook(formData: FormData): Promise<strin
     const pdfData = await pdf(Buffer.from(fileBuffer));
 
     const newBook: Book = {
-        id: crypto.randomUUID(),
+        id: uuidv4(),
         title: file.name.replace(/\.pdf$/i, ''),
         author: 'Uploaded Document',
         coverImageId: 'book-cover-1', // Using a placeholder cover
