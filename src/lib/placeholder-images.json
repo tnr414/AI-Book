@@ -5,6 +5,12 @@
       "description": "Alice in Wonderland Book Cover",
       "imageUrl": "https://picsum.photos/seed/alice/600/800",
       "imageHint": "book cover"
+    },
+    {
+      "id": "book-cover-2",
+      "description": "The Great Gatsby Book Cover",
+      "imageUrl": "https://picsum.photos/seed/gatsby/600/800",
+      "imageHint": "art deco"
     }
   ]
 }
