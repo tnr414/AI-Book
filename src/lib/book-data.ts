@@ -83,7 +83,10 @@ export function getBook(id: string): Book | undefined {
 }
 
 export function addBook(book: Book) {
-  if (!books.find(b => b.id === book.id)) {
+  const existingBookIndex = books.findIndex(b => b.id === book.id);
+  if (existingBookIndex !== -1) {
+    books[existingBookIndex] = book;
+  } else {
     books.push(book);
   }
 }

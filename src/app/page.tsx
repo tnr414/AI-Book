@@ -7,32 +7,40 @@ import { useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { AILoading } from '@/components/book/ai/AIShared';
-import { addBook, getBook } from '@/lib/book-data';
+import { processPdfAndCreateBook } from './actions';
+import { useToast } from '@/hooks/use-toast';
+
 
 export default function Home() {
   const router = useRouter();
+  const { toast } = useToast();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isUploading, setIsUploading] = useState(false);
 
-  // This is a mock function to simulate PDF processing
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
 
     setIsUploading(true);
-
-    // Simulate processing delay
-    await new Promise((resolve) => setTimeout(resolve, 2000));
     
-    // In a real app, you would process the PDF and generate the book data.
-    // For this demo, we'll use a pre-defined second book.
-    const newBook = getBook('2'); // The Great Gatsby
-    if (newBook) {
-      addBook(newBook); // Add it to our "database"
-      router.push(`/book/${newBook.id}`);
-    } else {
-        // Handle case where book 2 is not found (though it should be)
-        setIsUploading(false);
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      const newBookId = await processPdfAndCreateBook(formData);
+      if (newBookId) {
+        router.push(`/book/${newBookId}`);
+      } else {
+        throw new Error("Failed to create book.");
+      }
+    } catch (error) {
+       toast({
+        title: "Error Processing PDF",
+        description: "There was an error processing your PDF. Please try again.",
+        variant: "destructive"
+       });
+       console.error(error);
+       setIsUploading(false);
     }
   };
 
