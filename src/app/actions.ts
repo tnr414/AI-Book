@@ -1,7 +1,7 @@
 'use server';
 
 import { addBook, Book } from '@/lib/book-data';
-import pdf from 'pdf-parse/lib/pdf-parse';
+import pdf from 'pdf-parse';
 import { v4 as uuidv4 } from 'uuid';
 
 export async function processPdfAndCreateBook(formData: FormData): Promise<string | null> {
