@@ -108,7 +108,7 @@ export default function LandingPage() {
                         </CardContent>
                     </Card>
                     <div className="relative bg-gray-200 aspect-video rounded-lg flex items-center justify-center overflow-hidden">
-                        <Image src="https://picsum.photos/seed/ebook-reader/600/400" alt="Intelligent Book Demo" layout="fill" objectFit="cover" data-ai-hint="ebook reader" />
+                        <Image src="https://picsum.photos/seed/ai-book/600/400" alt="Intelligent Book Demo" fill objectFit="cover" data-ai-hint="ai book" />
                         <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
                             <PlayCircle className="h-20 w-20 text-white/70 hover:text-white transition-colors" />
                         </div>
