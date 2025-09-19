@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { generateVideoExplanation } from '@/ai/flows/ai-video-explanation';
 import { AILoading, AIError } from './AIShared';
-import { Clapperboard } from 'lucide-react';
+import { Clapperboard, Loader2 } from 'lucide-react';
 
 export function VideoExplainer() {
   const { selectedText } = useBook();
@@ -52,13 +52,17 @@ export function VideoExplainer() {
         )}
 
         <Button onClick={handleGenerateVideo} disabled={!selectedText || loading} className="w-full">
-          <Clapperboard className="mr-2 h-4 w-4" />
+          {loading ? (
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          ) : (
+            <Clapperboard className="mr-2 h-4 w-4" />
+          )}
           {loading ? 'Generating Video...' : 'Generate Video'}
         </Button>
 
         {error && <AIError message={error} />}
         
-        {loading && <AILoading loadingText="Generating video... this may take up to a minute." />}
+        {loading && !videoDataUri && <AILoading loadingText="Generating video... this may take up to a minute." />}
 
         {videoDataUri && (
           <div>

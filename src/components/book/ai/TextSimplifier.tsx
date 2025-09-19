@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { simplifyText } from '@/ai/flows/text-simplification';
 import { AILoading, AIError } from './AIShared';
-import { Wand2 } from 'lucide-react';
+import { Wand2, Loader2 } from 'lucide-react';
 
 export function TextSimplifier() {
   const { selectedText } = useBook();
@@ -52,13 +52,17 @@ export function TextSimplifier() {
         )}
 
         <Button onClick={handleSimplify} disabled={!selectedText || loading} className="w-full">
-          <Wand2 className="mr-2 h-4 w-4" />
+          {loading ? (
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          ) : (
+            <Wand2 className="mr-2 h-4 w-4" />
+          )}
           {loading ? 'Simplifying...' : 'Simplify Text'}
         </Button>
 
         {error && <AIError message={error} />}
         
-        {loading && <AILoading />}
+        {loading && !simplifiedText && <AILoading />}
 
         {simplifiedText && (
           <div>

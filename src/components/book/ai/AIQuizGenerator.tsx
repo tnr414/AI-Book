@@ -8,7 +8,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { generateQuiz, GenerateQuizOutput } from '@/ai/flows/ai-quiz-generator';
 import { AILoading, AIError } from './AIShared';
-import { Sparkles, CheckCircle, XCircle, RotateCw } from 'lucide-react';
+import { Sparkles, CheckCircle, XCircle, RotateCw, Loader2 } from 'lucide-react';
 
 type QuizState = 'idle' | 'generating' | 'taking' | 'submitted';
 type UserAnswers = { [questionIndex: number]: number };
@@ -119,9 +119,13 @@ export function AIQuizGenerator() {
         {quizState === 'idle' && (
             <div className="text-center p-8 border-dashed border-2 rounded-lg flex flex-col items-center gap-4">
                 <p className="text-muted-foreground">Ready to test your knowledge?</p>
-                <Button onClick={handleGenerateQuiz}>
-                    <Sparkles className="mr-2 h-4 w-4" />
-                    Generate Quiz
+                <Button onClick={handleGenerateQuiz} disabled={quizState === 'generating'}>
+                    {quizState === 'generating' ? (
+                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    ) : (
+                       <Sparkles className="mr-2 h-4 w-4" />
+                    )}
+                    {quizState === 'generating' ? 'Generating...' : 'Generate Quiz'}
                 </Button>
             </div>
         )}
@@ -150,9 +154,13 @@ export function AIQuizGenerator() {
                     <p className="text-4xl font-bold text-center">{calculateScore().toFixed(0)}%</p>
                 </CardContent>
                  <CardFooter>
-                     <Button onClick={handleGenerateQuiz} className="w-full" variant="secondary">
-                        <RotateCw className="mr-2 h-4 w-4" />
-                        Try Another Quiz
+                     <Button onClick={handleGenerateQuiz} className="w-full" variant="secondary" disabled={quizState === 'generating'}>
+                        {quizState === 'generating' ? (
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        ) : (
+                            <RotateCw className="mr-2 h-4 w-4" />
+                        )}
+                        {quizState === 'generating' ? 'Generating...' : 'Try Another Quiz'}
                     </Button>
                  </CardFooter>
             </Card>
