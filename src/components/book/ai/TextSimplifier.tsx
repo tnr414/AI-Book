@@ -33,21 +33,21 @@ export function TextSimplifier() {
   };
 
   return (
-    <Card className="border-0 shadow-none">
+    <div className='p-4'>
       <CardHeader>
         <CardTitle>Text Simplifier</CardTitle>
         <CardDescription>Select text in the chapter to simplify it here.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         {selectedText ? (
-          <Card className="bg-muted">
+          <Card className="bg-background">
             <CardContent className="p-4">
-              <p className="italic">"{selectedText}"</p>
+              <p className="italic text-sm">"{selectedText}"</p>
             </CardContent>
           </Card>
         ) : (
           <div className="text-center text-sm text-muted-foreground p-8 border-dashed border-2 rounded-lg">
-            <p>Select some text from the chapter to get started.</p>
+            <p>Highlight some text from the chapter to get started.</p>
           </div>
         )}
 
@@ -62,8 +62,8 @@ export function TextSimplifier() {
 
         {simplifiedText && (
           <div>
-            <h3 className="font-semibold mb-2">Simplified Version:</h3>
-            <Card>
+            <h3 className="font-semibold mb-2 text-sm">Simplified Version:</h3>
+            <Card className="bg-background">
               <CardContent className="p-4">
                 <p>{simplifiedText}</p>
               </CardContent>
@@ -71,6 +71,6 @@ export function TextSimplifier() {
           </div>
         )}
       </CardContent>
-    </Card>
+    </div>
   );
 }

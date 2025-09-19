@@ -20,9 +20,10 @@ import { ScrollArea } from '../ui/scroll-area';
 
 export function AIPanel() {
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full bg-slate-50/50 dark:bg-zinc-900/50">
       <Tabs defaultValue="chat" className="flex flex-col h-full overflow-hidden">
-        <TabsList className="grid w-full grid-cols-4 m-2">
+        <div className="p-2 border-b bg-background">
+        <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="chat">
             <MessageSquare className="h-4 w-4" />
             <span className="sr-only">Chat</span>
@@ -40,17 +41,18 @@ export function AIPanel() {
             <span className="sr-only">Quiz</span>
           </TabsTrigger>
         </TabsList>
+        </div>
         <ScrollArea className="flex-1">
-          <TabsContent value="chat" className="mt-0 p-4">
+          <TabsContent value="chat" className="mt-0">
             <AIChatAssistant />
           </TabsContent>
-          <TabsContent value="simplify" className="mt-0 p-4">
+          <TabsContent value="simplify" className="mt-0">
             <TextSimplifier />
           </TabsContent>
-          <TabsContent value="video" className="mt-0 p-4">
+          <TabsContent value="video" className="mt-0">
             <VideoExplainer />
           </TabsContent>
-          <TabsContent value="quiz" className="mt-0 p-4">
+          <TabsContent value="quiz" className="mt-0">
             <AIQuizGenerator />
           </TabsContent>
         </ScrollArea>

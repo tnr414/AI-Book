@@ -33,21 +33,21 @@ export function VideoExplainer() {
   };
 
   return (
-    <Card className="border-0 shadow-none">
+    <div className='p-4'>
       <CardHeader>
         <CardTitle>Video Explainer</CardTitle>
         <CardDescription>Select text to generate a short video explanation.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         {selectedText ? (
-          <Card className="bg-muted">
+          <Card className="bg-background">
             <CardContent className="p-4">
-              <p className="italic">"{selectedText}"</p>
+              <p className="italic text-sm">"{selectedText}"</p>
             </CardContent>
           </Card>
         ) : (
           <div className="text-center text-sm text-muted-foreground p-8 border-dashed border-2 rounded-lg">
-            <p>Select some text from the chapter to get started.</p>
+            <p>Highlight some text from the chapter to generate a video.</p>
           </div>
         )}
 
@@ -62,15 +62,15 @@ export function VideoExplainer() {
 
         {videoDataUri && (
           <div>
-            <h3 className="font-semibold mb-2">Video Explanation:</h3>
+            <h3 className="font-semibold mb-2 text-sm">Video Explanation:</h3>
             <Card>
-              <CardContent className="p-0">
-                <video src={videoDataUri} controls className="w-full rounded-md" />
+              <CardContent className="p-0 overflow-hidden rounded-lg">
+                <video src={videoDataUri} controls className="w-full aspect-video" />
               </CardContent>
             </Card>
           </div>
         )}
       </CardContent>
-    </Card>
+    </div>
   );
 }

@@ -14,16 +14,16 @@ export function ChapterContent() {
 
   if (!chapter) {
     return (
-      <div className="flex h-full items-center justify-center text-muted-foreground">
-        <p>Select a chapter to begin reading.</p>
+      <div className="flex h-full items-center justify-center text-muted-foreground p-8 text-center">
+        <p>Select a chapter from the menu to begin reading.</p>
       </div>
     );
   }
 
   return (
     <ScrollArea className="h-full">
-        <div ref={contentRef} className="prose prose-lg max-w-none p-2 md:p-4">
-            <h2 className="font-headline text-3xl mb-4">{chapter.title}</h2>
+        <div ref={contentRef} className="prose prose-lg max-w-none p-6 md:p-8 lg:p-12">
+            <h2 className="font-headline text-4xl mb-6">{chapter.title}</h2>
             <p className="whitespace-pre-wrap text-lg leading-relaxed">{chapter.content}</p>
         </div>
     </ScrollArea>
