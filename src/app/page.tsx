@@ -2,7 +2,8 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { CheckCircle, BarChart, Zap, Shield } from 'lucide-react';
+import { MessageSquare, BookText, Video, ClipboardCheck, PlayCircle } from 'lucide-react';
+import Image from 'next/image';
 
 const MicrosoftLogo = () => (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 21" className="h-5 w-5 mr-2">
@@ -63,10 +64,10 @@ export default function LandingPage() {
         </div>
           <div className="container mx-auto px-4 md:px-6 text-center relative z-10">
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-gray-900">
-              Azure AI Document Intelligence
+              Intelligent Book
             </h1>
             <p className="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-gray-600">
-              Accelerate information extraction from documents.
+              Transform your reading into an interactive, AI-powered experience.
             </p>
             <div className="mt-8">
               <Button asChild size="lg">
@@ -91,23 +92,26 @@ export default function LandingPage() {
                 <div className="text-center mb-12">
                   <p className="text-sm font-semibold text-blue-600 uppercase">OVERVIEW</p>
                   <h2 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                    Quickly extract text and structure from documents
+                    Bring Your Books to Life with AI
                   </h2>
                   <p className="mt-4 max-w-3xl mx-auto text-lg text-gray-500">
-                    Intelligent Book is an AI service that applies advanced machine learning to extract text, key-value pairs, tables, and structures from documents automatically and accurately. Turn documents into usable data and shift your focus to acting on information rather than compiling it.
+                    Intelligent Book is an innovative AI service that transforms static PDFs into dynamic, interactive learning experiences. Upload your book, and our advanced AI will help you understand concepts, answer questions, simplify complex text, and even generate quizzes to test your knowledge.
                   </p>
                 </div>
                 <div className="grid md:grid-cols-2 gap-8 items-center">
                     <Card>
                         <CardHeader>
-                            <CardTitle>Use AI to Build Document Processing Workflows</CardTitle>
+                            <CardTitle>Unlock a New Way of Reading</CardTitle>
                         </CardHeader>
                         <CardContent>
-                            <p>Learn how to accelerate your business processes by automating text extraction with AI Document Intelligence. This webinar features hands-on demos for key use cases such as document processing, knowledge mining, and industry-specific AI model customization.</p>
+                            <p>Learn how to accelerate your learning and comprehension by turning any book into an AI companion. This webinar demonstrates key features like the AI chat assistant, text simplifier, and on-demand video explanations to help you get the most out of your reading.</p>
                         </CardContent>
                     </Card>
-                    <div className="bg-gray-200 aspect-video rounded-lg flex items-center justify-center">
-                        <p className="text-gray-500">[Video Placeholder]</p>
+                    <div className="relative bg-gray-200 aspect-video rounded-lg flex items-center justify-center overflow-hidden">
+                        <Image src="https://picsum.photos/seed/reading/600/400" alt="Intelligent Book Demo" layout="fill" objectFit="cover" data-ai-hint="person reading" />
+                        <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                            <PlayCircle className="h-20 w-20 text-white/70 hover:text-white transition-colors" />
+                        </div>
                     </div>
                 </div>
               </TabsContent>
@@ -115,28 +119,75 @@ export default function LandingPage() {
               <TabsContent value="features">
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                   <Card>
-                    <CardHeader><CardTitle className="flex items-center gap-2"><CheckCircle className="text-green-500" /> High Accuracy</CardTitle></CardHeader>
-                    <CardContent><p>Get the most accurate text extraction available.</p></CardContent>
+                    <CardHeader><CardTitle className="flex items-center gap-2"><MessageSquare className="text-blue-500" /> AI Chat Assistant</CardTitle></CardHeader>
+                    <CardContent><p>Ask questions about the content and get instant, context-aware answers.</p></CardContent>
                   </Card>
                   <Card>
-                    <CardHeader><CardTitle className="flex items-center gap-2"><BarChart className="text-blue-500" /> Structured Data</CardTitle></CardHeader>
-                    <CardContent><p>Extract tables, key-value pairs, and more.</p></CardContent>
+                    <CardHeader><CardTitle className="flex items-center gap-2"><BookText className="text-purple-500" /> Text Simplification</CardTitle></CardHeader>
+                    <CardContent><p>Select complex passages and let AI re-explain them in simpler terms.</p></CardContent>
+                  </Card>
+                   <Card>
+                    <CardHeader><CardTitle className="flex items-center gap-2"><Video className="text-green-500" /> Video Explanations</CardTitle></CardHeader>
+                    <CardContent><p>Generate short, animated video explanations for selected text on the fly.</p></CardContent>
                   </Card>
                   <Card>
-                    <CardHeader><CardTitle className="flex items-center gap-2"><Zap className="text-yellow-500" /> Fast Processing</CardTitle></CardHeader>
-                    <CardContent><p>Analyze documents in seconds, not hours.</p></CardContent>
-                  </Card>
-                  <Card>
-                    <CardHeader><CardTitle className="flex items-center gap-2"><Shield className="text-red-500" /> Secure & Private</CardTitle></CardHeader>
-                    <CardContent><p>Your data is processed securely and privately.</p></CardContent>
+                    <CardHeader><CardTitle className="flex items-center gap-2"><ClipboardCheck className="text-yellow-500" /> AI Quiz Generator</CardTitle></CardHeader>
+                    <CardContent><p>Test your knowledge with automatically generated quizzes for any chapter.</p></CardContent>
                   </Card>
                 </div>
               </TabsContent>
               <TabsContent value="pricing">
-                <p className="text-center text-gray-500">Pricing information coming soon.</p>
+                 <div className="text-center">
+                     <h3 className="text-2xl font-bold mb-4">Simple, Transparent Pricing</h3>
+                     <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                         <Card>
+                             <CardHeader><CardTitle>Free</CardTitle></CardHeader>
+                             <CardContent className="space-y-2">
+                                 <p className="text-3xl font-bold">$0<span className="text-sm font-normal text-muted-foreground">/mo</span></p>
+                                 <p>Process 1 book per month</p>
+                                 <p>Basic AI features</p>
+                                 <Button className="w-full mt-4" variant="outline">Get Started</Button>
+                             </CardContent>
+                         </Card>
+                         <Card className="border-blue-500 shadow-lg">
+                              <CardHeader><CardTitle>Pro</CardTitle></CardHeader>
+                             <CardContent className="space-y-2">
+                                 <p className="text-3xl font-bold">$15<span className="text-sm font-normal text-muted-foreground">/mo</span></p>
+                                 <p>Process 20 books per month</p>
+                                 <p>All AI features</p>
+                                 <Button className="w-full mt-4">Choose Pro</Button>
+                             </CardContent>
+                         </Card>
+                         <Card>
+                             <CardHeader><CardTitle>Enterprise</CardTitle></CardHeader>
+                             <CardContent className="space-y-2">
+                                 <p className="text-3xl font-bold">Custom</p>
+                                 <p>Unlimited books & users</p>
+                                 <p>Dedicated support</p>
+                                 <Button className="w-full mt-4" variant="outline">Contact Us</Button>
+                             </CardContent>
+                         </Card>
+                     </div>
+                 </div>
               </TabsContent>
               <TabsContent value="faq">
-                <p className="text-center text-gray-500">Frequently Asked Questions coming soon.</p>
+                <div className="max-w-3xl mx-auto">
+                    <h3 className="text-2xl font-bold mb-6 text-center">Frequently Asked Questions</h3>
+                    <div className="space-y-4">
+                        <Card>
+                            <CardHeader><CardTitle>What file types are supported?</CardTitle></CardHeader>
+                            <CardContent><p>Currently, we only support PDF files. We are working on adding support for EPUB and other formats soon.</p></CardContent>
+                        </Card>
+                         <Card>
+                            <CardHeader><CardTitle>Is my data secure?</CardTitle></CardHeader>
+                            <CardContent><p>Yes, we take data privacy seriously. Your uploaded documents are processed securely and are not used for training our AI models without your explicit consent.</p></CardContent>
+                        </Card>
+                         <Card>
+                            <CardHeader><CardTitle>Can I use this on my mobile device?</CardTitle></CardHeader>
+                            <CardContent><p>Absolutely! The Intelligent Book reader is fully responsive and works beautifully on desktops, tablets, and mobile phones.</p></CardContent>
+                        </Card>
+                    </div>
+                </div>
               </TabsContent>
             </Tabs>
           </div>
